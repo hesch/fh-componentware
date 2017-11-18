@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+overriddenByCSS=,editorColorHeredoc,editorColorPhpdoc,codeStyleNormal,editorColorComment,editorColorTask,editorColorVariable,editorBlocknameColor,editorColorBoundarymaker,editorColorPHPDocComment,editorColorString,editorStmtColorBoundarymaker,editorColorKeyword,editorColorLineComment,editorColorNumber,
+predarkestdark.codeStyleNormal=\#BCADAD | null | null | null | null | null
+predarkestdark.editorBlocknameColor=\#CC99FF | null | false | null | null | null
+predarkestdark.editorColorBoundarymaker=\#BCADAD | null | null | null | null | null
+predarkestdark.editorColorComment=\#99968B | null | null | null | null | null
+predarkestdark.editorColorHeredoc=\#B3B5AF | null | null | null | null | null
+predarkestdark.editorColorKeyword=\#CC99FF | null | false | null | null | null
+predarkestdark.editorColorLineComment=\#99968B | null | null | null | null | null
+predarkestdark.editorColorNumber=\#F08080 | null | null | null | null | null
+predarkestdark.editorColorPHPDocComment=\#B3B5AF | null | null | null | null | null
+predarkestdark.editorColorPhpdoc=\#B3B5AF | null | null | null | null | null
+predarkestdark.editorColorString=\#E6FF99 | null | null | null | null | null
+predarkestdark.editorColorTask=\#ACC1AC | null | null | null | null | null
+predarkestdark.editorColorVariable=\#EDE9F6 | null | false | null | null | null
+predarkestdark.editorStmtColorBoundarymaker=\#BCADAD | null | null | null | null | null

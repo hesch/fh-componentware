@@ -1,0 +1,3 @@
+file c30867bddf3f2e100f30512e7efc1b8691c36f8f chash=8706909d9a8550a4d5181d23b60fa2b266318780 group=sys mode=0664 owner=root path=glassfish/modules/gf-client-module-l10n.jar pkg.csize=77974 pkg.size=88969
+file 1b34498abfd8c53cbc0758adea0de6017adfe27a chash=02cf990e070f78911a9247a2e1dbedda78abd110 group=sys mode=0664 owner=root path=glassfish/modules/appclient-server-core-l10n.jar pkg.csize=47893 pkg.size=57596
+file 6ed4431c1618cdfb679a0bb8d1c223d6765e96bf chash=6e68c0b7b9783862461f122470330baebb6f99aa group=sys mode=0664 owner=root path=glassfish/lib/gf-client-l10n.jar pkg.csize=25186 pkg.size=30476

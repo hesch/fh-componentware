@@ -1,0 +1,16 @@
+set name=fmri value=pkg:/glassfish-gui-l10n@4.0,0-89:20130515T040941Z
+set name=info.classification value="Application Servers"
+set name=pkg.description value="Localization of the web based management console for administering GlassFish server. GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API."
+set name=pkg.summary value="GlassFish Administration Console Localization"
+depend fmri=pkg:/glassfish-gui type=require
+license 8741fa556feea4ca58ec28abc47de0bf9d5b39a3 chash=28b7cfba8f297b99296afc231955dc90e8d76d47 license="CDDL and GPL v2 with classpath exception" pkg.csize=12394 pkg.size=38052
+dir group=sys mode=0775 owner=root path=glassfish
+dir group=sys mode=0775 owner=root path=glassfish/modules
+file 80263e1d8829baa4463e1dade70ba1d54aca4db8 chash=d21050deeb46815ff13b250e05796a277625c75a group=sys mode=0664 owner=root path=glassfish/modules/console-common-l10n.jar pkg.csize=2534759 pkg.size=2730543
+file 6bdf4274a8b1e9c04459ca65c198387fbb8e8695 chash=8625995b4bd9bdd7b6e54a1ee9a740692b2c5553 group=sys mode=0664 owner=root path=glassfish/modules/webui-jsf-plugin-l10n.jar pkg.csize=56645 pkg.size=65129
+file 85ead480f2b231e858c87a7f93380c6639b06ed3 chash=a94f066dab02c0529465a2cf4c7b6c72a18307a3 group=sys mode=0664 owner=root path=glassfish/modules/console-core-l10n.jar pkg.csize=172794 pkg.size=174570
+file 6899214ffb59d2e49de158a81c586cbbcbf14fac chash=311f8c216c83c81c0436ef0dadc9d55bbdc8eea8 group=sys mode=0664 owner=root path=glassfish/modules/webui-jsf-suntheme-plugin-l10n.jar pkg.csize=136447 pkg.size=215144
+file efb2f49f0a27f1aab1d1304baf34d0532afb7823 chash=6a52428784fbf3bc9900ac222b3b612013cc429a group=sys mode=0664 owner=root path=glassfish/modules/console-cluster-plugin-l10n.jar pkg.csize=1380316 pkg.size=1493699
+file 664d4b10db97e05db1eca59b6c906db34076f6e2 chash=9215e6effc15ae6b30e89a29da49ff7614bc5d22 group=sys mode=0664 owner=root path=glassfish/modules/console-updatecenter-plugin-l10n.jar pkg.csize=26390 pkg.size=28993
+file 424eeec60cd2ceb3c60e3355bcf6f547ddb06e40 chash=724bb2e7fe8be093152e08c8e7bf570b78202549 group=sys mode=0664 owner=root path=glassfish/modules/console-community-branding-plugin-l10n.jar pkg.csize=28127 pkg.size=30793
+set name=publisher value=release.glassfish.org

@@ -1,0 +1,12 @@
+set name=fmri value=pkg:/glassfish-ejb-lite-l10n@4.0,0-89:20130515T040910Z
+set name=info.classification value="Application Servers"
+set name=pkg.description value="Localization GlassFish EJB Lite.GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API."
+set name=pkg.summary value="GlassFish EJB Lite Localization"
+depend fmri=pkg:/glassfish-ejb-lite type=require
+license 8741fa556feea4ca58ec28abc47de0bf9d5b39a3 chash=28b7cfba8f297b99296afc231955dc90e8d76d47 license="CDDL and GPL v2 with classpath exception" pkg.csize=12394 pkg.size=38052
+dir group=sys mode=0775 owner=root path=glassfish
+dir group=sys mode=0775 owner=root path=glassfish/modules
+file edc48e77fa93e93e97f8189e0819f2f0d8f396d1 chash=b58bdcf0a03b34beca1f324e201af5aa54e7eb1f group=sys mode=0664 owner=root path=glassfish/modules/ejb-container-l10n.jar pkg.csize=102970 pkg.size=116852
+file 8e54cc743c6fba964ad2abf108f61cdb2af4b69a chash=232cff4c08bd97dbc5ea55b87b27a178b592b265 group=sys mode=0664 owner=root path=glassfish/modules/gf-ejb-connector-l10n.jar pkg.csize=12028 pkg.size=14871
+file 9803990d0dabeeedc6c61f542d85fd28bd858e0d chash=155cf3bca9892df4ce834e1ecfd69b1f1d7f77fd group=sys mode=0664 owner=root path=glassfish/modules/console-ejb-lite-plugin-l10n.jar pkg.csize=120962 pkg.size=134851
+set name=publisher value=release.glassfish.org

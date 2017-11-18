@@ -1,0 +1,5 @@
+file 13ee53f19ecf15215ce6a72bdb3ea58d9bf16af0 chash=42e8225c815fee1191b049c39adfddceeaa5b2d5 group=sys mode=0664 owner=root path=glassfish/modules/connectors-runtime-l10n.jar pkg.csize=99120 pkg.size=112991
+file 63e02e7fc641a5884a9fd7634e0016e8010af836 chash=6eb7d757267455bea30fd64aed16b91aa56f405a group=sys mode=0664 owner=root path=glassfish/modules/javamail-connector-l10n.jar pkg.csize=15420 pkg.size=18497
+file 3f3627fddc61d4ac704b2be7e6656f8451630f0d chash=bad27369250ba99c7a75821ce3a5bdac6cf5c04f group=sys mode=0664 owner=root path=glassfish/modules/work-management-l10n.jar pkg.csize=12771 pkg.size=15609
+file 677b7d130919f40b117d9f778b9b226eb579ae7c chash=200d9d5ba2eb00f77e442b220aa4562af1d20871 group=sys mode=0664 owner=root path=glassfish/modules/console-jca-plugin-l10n.jar pkg.csize=650563 pkg.size=717173
+file 8bd333335f716be6e4270d58487543bdf1ac8dd9 chash=693876426bf60cebc34fadbc472a35f88bfcf73b group=sys mode=0664 owner=root path=glassfish/modules/connectors-admin-l10n.jar pkg.csize=363952 pkg.size=413480

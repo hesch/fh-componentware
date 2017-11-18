@@ -1,0 +1,12 @@
+set name=fmri value=pkg:/metro-l10n@2.3,0-259:20130515T041410Z
+set name=info.classification value="Application Servers"
+set name=pkg.description value="Metro Web Services Stack localization."
+set name=pkg.summary value="Metro Web Services Stack localization"
+depend fmri=pkg:/metro type=require
+license 8741fa556feea4ca58ec28abc47de0bf9d5b39a3 chash=28b7cfba8f297b99296afc231955dc90e8d76d47 license="CDDL and GPL v2 with classpath exception" pkg.csize=12394 pkg.size=38052
+dir group=sys mode=0775 owner=root path=glassfish
+dir group=sys mode=0775 owner=root path=glassfish/modules
+file cd666c60f2b12ad736b5b0f8298c73decbd7a481 chash=1f9078d564f5a10041ae41b06c33bfb9f2800c0d group=sys mode=0664 owner=root path=glassfish/modules/jsr109-impl-l10n.jar pkg.csize=32082 pkg.size=36347
+file fc70bb33d662d0c5c57b1aa6fa6f587b987c337c chash=9686da664d61917faa780f568a4c71fec98972f7 group=sys mode=0664 owner=root path=glassfish/modules/webservices.security-l10n.jar pkg.csize=15016 pkg.size=17950
+file c0d7d73ce38b176498ef2c7d32a5d57ad3fdfbef chash=b65dbc10b411f52c6b012b68b52b008b5ba15387 group=sys mode=0664 owner=root path=glassfish/modules/webservices-connector-l10n.jar pkg.csize=15656 pkg.size=19010
+set name=publisher value=release.glassfish.org

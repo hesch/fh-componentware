@@ -1,0 +1,10 @@
+package de.randomerror.autofinanzierung.Remote;
+
+import javax.ejb.Remote;
+
+import de.randomerror.autofinanzierung.HelloWorld;
+
+@Remote
+public interface HelloWorldRemote extends HelloWorld {
+
+}

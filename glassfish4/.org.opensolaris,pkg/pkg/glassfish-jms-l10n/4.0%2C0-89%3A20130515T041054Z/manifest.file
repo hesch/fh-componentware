@@ -1,0 +1,6 @@
+file 8e14921777594218d1a9969b5d8d7f59a9dbcbf1 chash=3c81e7482bf27491605edf6f40888c0734228051 group=sys mode=0664 owner=root path=glassfish/modules/console-jms-plugin-l10n.jar pkg.csize=587216 pkg.size=636498
+file c6ca0a2c2f1b44e999d14737e0a909ca5e0704e1 chash=ee64d4d69885e91e25d8cbf6dd4e21c964e4ac9d group=sys mode=0664 owner=root path=glassfish/modules/jms-core-l10n.jar pkg.csize=19834 pkg.size=22668
+file 57bf718968b45493a21a00b9d1b03aa4184f12f7 chash=561cbb2238a701131010aba436e35e6bf181d2ef group=sys mode=0664 owner=root path=glassfish/modules/connectors-inbound-runtime-l10n.jar pkg.csize=14942 pkg.size=17821
+file 104930d220341fc18b95451c0ffbce500ae2cfd8 chash=9d8a4b11894ce010f64ce1e436fe404deb69b158 group=sys mode=0664 owner=root path=glassfish/modules/jms-admin-l10n.jar pkg.csize=184421 pkg.size=203118
+file 3db9e636201400640d6fc4fa93769898a0589108 chash=96271987f850fc490084f0ba71741dd2eecc8105 group=sys mode=0664 owner=root path=glassfish/modules/gf-jms-connector-l10n.jar pkg.csize=12363 pkg.size=15351
+file 9da420b6daf615d59f5e08f622f5a796b0a5ad1d chash=42ca858963594c240b0bdf5a7907b7f2b5d2b1d7 group=sys mode=0664 owner=root path=glassfish/modules/gf-jms-injection-l10n.jar pkg.csize=17264 pkg.size=19776

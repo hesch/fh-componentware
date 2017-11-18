@@ -1,0 +1,10 @@
+set name=fmri value=pkg:/glassfish-jta-l10n@4.0,0-89:20130515T041123Z
+set name=info.classification value="Application Servers"
+set name=pkg.description value="Localization of GlassFish JTA package. GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API."
+set name=pkg.summary value="GlassFish Local Transaction Support Localization"
+depend fmri=pkg:/glassfish-jta type=require
+license 8741fa556feea4ca58ec28abc47de0bf9d5b39a3 chash=28b7cfba8f297b99296afc231955dc90e8d76d47 license="CDDL and GPL v2 with classpath exception" pkg.csize=12394 pkg.size=38052
+dir group=sys mode=0775 owner=root path=glassfish
+dir group=sys mode=0775 owner=root path=glassfish/modules
+file 75b41951f678be484de939e9a145dd870b78b946 chash=b2029c97e2f2b1d3005d3448fc6c0de512e86889 group=sys mode=0664 owner=root path=glassfish/modules/jta-l10n.jar pkg.csize=53888 pkg.size=63378
+set name=publisher value=release.glassfish.org

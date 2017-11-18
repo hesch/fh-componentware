@@ -1,0 +1,8 @@
+file 77a443c678772c3fd796666b5a9e0ef86d5d1850 chash=7236e827d9e2fcf3b1d5d0c62e755908fb7b557e group=sys mode=0664 owner=root path=glassfish/modules/web-cli-l10n.jar pkg.csize=279214 pkg.size=326269
+file 5a6e369b75b51f9391e4f8df044d38807ccafe1f chash=10c0a13c26217fc8a36067b4f86425dbd518c787 group=sys mode=0664 owner=root path=glassfish/modules/stats77-l10n.jar pkg.csize=11024 pkg.size=14537
+file d7ba4f7895790ba72fd4a9e14ce0acdb9bc0642c chash=bb5184fc985fd4f981b272bc107263bc5851046b group=sys mode=0664 owner=root path=glassfish/modules/web-glue-l10n.jar pkg.csize=62724 pkg.size=73109
+file 8a9f60c1ab340c51422a0174c84ba89753acf586 chash=d333a205f68908b9bb1a6c5bbbe32231d8ac4baf group=sys mode=0664 owner=root path=glassfish/modules/web-gui-plugin-common-l10n.jar pkg.csize=106259 pkg.size=117955
+file 020df634d8840a3fd33afd8dc2fb0b3eac31a670 chash=c7a7e6fd916ce29a2749ed03be20ac76fdf821ca group=sys mode=0664 owner=root path=glassfish/modules/console-web-plugin-l10n.jar pkg.csize=1105074 pkg.size=1181424
+file 21ec50829c1c5c6b6c446b866a0e108693364402 chash=d7b613c6eb5416c8636376391906821d23bada93 group=sys mode=0664 owner=root path=glassfish/modules/war-util-l10n.jar pkg.csize=10929 pkg.size=14678
+file a1efe106bf688828b3e8c641575e7cb2a6879209 chash=1696a7833cc571be697ed6437be3bfbc8f9100de group=sys mode=0664 owner=root path=glassfish/modules/web-naming-l10n.jar pkg.csize=36019 pkg.size=39767
+file 65fbe36d1b7fd395005686bc51575d5735feb621 chash=3e566e8ae0cf172585f977326a47a0465de36e3a group=sys mode=0664 owner=root path=glassfish/modules/web-core-l10n.jar pkg.csize=149200 pkg.size=228822

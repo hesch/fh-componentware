@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.ejb.Stateless"/>
+<fullyQualifiedTypeName name="javax.ejb.Local"/>
+<fullyQualifiedTypeName name="javax.ejb.Remote"/>
+<fullyQualifiedTypeName name="de.randomerror.autofinanzierung.HelloWorld"/>
+<fullyQualifiedTypeName name="de.randomerror.autofinanzierung.Remote.HelloWorldRemote"/>
+<fullyQualifiedTypeName name="de.randomerror.autofinanzierung.Local.HelloWorldLocal"/>
+<fullyQualifiedTypeName name="de.fh_dortmund.inf.cw.car_financing.client.shared.ServiceHandler"/>
+<fullyQualifiedTypeName name="de.fh_dortmund.inf.cw.car_financing.client.shared.CarFinancingHandler"/>
+<fullyQualifiedTypeName name="javax.naming.Context"/>
+<fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+</qualifiedTypeNameHistroy>

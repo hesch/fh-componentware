@@ -1,0 +1,13 @@
+set name=fmri value=pkg:/glassfish-jdbc-l10n@4.0,0-89:20130515T041029Z
+set name=info.classification value="Application Servers"
+set name=pkg.description value="Localization of GlassFish JDBC.  GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API."
+set name=pkg.summary value="GlassFish JDBC Localization"
+depend fmri=pkg:/glassfish-jdbc type=require
+license 8741fa556feea4ca58ec28abc47de0bf9d5b39a3 chash=28b7cfba8f297b99296afc231955dc90e8d76d47 license="CDDL and GPL v2 with classpath exception" pkg.csize=12394 pkg.size=38052
+dir group=sys mode=0775 owner=root path=glassfish
+dir group=sys mode=0775 owner=root path=glassfish/modules
+file 1a00aaf11cd7bea480b155beaf2eb7d504455d84 chash=5bccb0ceae04bedaa206b5c51ac980a56bdd9c75 group=sys mode=0664 owner=root path=glassfish/modules/jdbc-runtime-l10n.jar pkg.csize=13772 pkg.size=16406
+file fe4d08c31e4cbbcac8ed4d4a7812a563e47a0386 chash=2333ce1baa629030e8f2dc57af579957428fafbf group=sys mode=0664 owner=root path=glassfish/modules/jdbc-config-l10n.jar pkg.csize=11607 pkg.size=14343
+file f221dc658a6719f97a32f45d983425782e75d849 chash=fc092d731f717756b24728c9115ff430fb1650c6 group=sys mode=0664 owner=root path=glassfish/modules/console-jdbc-plugin-l10n.jar pkg.csize=455200 pkg.size=488913
+file 8329e1c5d55fef3186f6bfbcc9e3b72274b06812 chash=056dc91475a06725198a35609297d49b7852dced group=sys mode=0664 owner=root path=glassfish/modules/jdbc-admin-l10n.jar pkg.csize=157278 pkg.size=168423
+set name=publisher value=release.glassfish.org

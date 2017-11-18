@@ -1,0 +1,5 @@
+file cb6e494306e1717df68b2e652e58f361dbc197a3 chash=cb7130c2949b6ff4afb9aedee75bef379bcd266b group=sys mode=0664 owner=root path=glassfish/modules/console-common-full-plugin-l10n.jar pkg.csize=412883 pkg.size=457510
+file 284d8ac7bda22f9f8a0a01fa55ca9282a44c46f1 chash=9eee033a7d91dc0dcc067d32e1739fb4e19c8920 group=sys mode=0664 owner=root path=glassfish/modules/console-concurrent-plugin-l10n.jar pkg.csize=407904 pkg.size=450062
+file ba53d36356b9c4bccc9ead1a8e4185918ffaf395 chash=2f1960a8201b1350b8011c0f774fe13cd5d66552 group=sys mode=0664 owner=root path=glassfish/modules/concurrent-impl-l10n.jar pkg.csize=19602 pkg.size=22142
+file d2a30f5302951e4380fc807495818ceda8364ec6 chash=38f955a3fefcf54fc8bed405604d63b6c5ec7b0b group=sys mode=0664 owner=root path=glassfish/modules/deployment-javaee-full-l10n.jar pkg.csize=13693 pkg.size=16649
+file 186e6173f0b8652aece870dae81a2ce474c1a3dd chash=e3442f33ba5a4216daf7c4014d9a72c3759effc0 group=sys mode=0664 owner=root path=glassfish/modules/concurrent-connector-l10n.jar pkg.csize=12840 pkg.size=15584

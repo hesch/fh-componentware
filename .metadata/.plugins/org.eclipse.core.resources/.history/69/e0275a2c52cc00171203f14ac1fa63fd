@@ -1,0 +1,5 @@
+package de.randomerror.autofinanzierung.Remote;
+
+public interface CarFinancingHandlerRemote {
+
+}

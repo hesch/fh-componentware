@@ -1,0 +1,12 @@
+set name=fmri value=pkg:/glassfish-cluster-l10n@4.0,0-89:20130515T040721Z
+set name=info.classification value="Application Servers"
+set name=pkg.description value="Localization of GlassFish cluster.  GlassFish Server is a modular and lightweight Java EE 7 compliant application server. Key features include an OSGi runtime, fast startup time, maven support, and rapid iterative development with Active Redeploy.  GlassFish Server also offers feature-rich administration with the web console, command line, and RESTful API."
+set name=pkg.summary value="GlassFish cluster Localization"
+depend fmri=pkg:/glassfish-cluster type=require
+license 8741fa556feea4ca58ec28abc47de0bf9d5b39a3 chash=28b7cfba8f297b99296afc231955dc90e8d76d47 license="CDDL and GPL v2 with classpath exception" pkg.csize=12394 pkg.size=38052
+dir group=sys mode=0775 owner=root path=glassfish
+dir group=sys mode=0775 owner=root path=glassfish/modules
+file c761b4852444c3fa0fd879dd86c5c218101fc869 chash=59befe15dd0b9c7979b9edff1b058f8a613c02fe group=sys mode=0664 owner=root path=glassfish/modules/cluster-common-l10n.jar pkg.csize=40914 pkg.size=51309
+file 867c6c95e15fb81b7dae80be7e547b714b357d01 chash=b69a28c2d7942d5a5e8959142b272b05758244e9 group=sys mode=0664 owner=root path=glassfish/modules/cluster-cli-l10n.jar pkg.csize=370468 pkg.size=394243
+file e8103389aa4fc11bc399325082cb7a13eeb0671d chash=8ba50705804cfe0d141b554ba397f0f27378d9ba group=sys mode=0664 owner=root path=glassfish/modules/cluster-admin-l10n.jar pkg.csize=524549 pkg.size=571077
+set name=publisher value=release.glassfish.org

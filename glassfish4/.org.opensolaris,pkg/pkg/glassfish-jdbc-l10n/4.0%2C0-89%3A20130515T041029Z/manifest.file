@@ -1,0 +1,4 @@
+file 1a00aaf11cd7bea480b155beaf2eb7d504455d84 chash=5bccb0ceae04bedaa206b5c51ac980a56bdd9c75 group=sys mode=0664 owner=root path=glassfish/modules/jdbc-runtime-l10n.jar pkg.csize=13772 pkg.size=16406
+file fe4d08c31e4cbbcac8ed4d4a7812a563e47a0386 chash=2333ce1baa629030e8f2dc57af579957428fafbf group=sys mode=0664 owner=root path=glassfish/modules/jdbc-config-l10n.jar pkg.csize=11607 pkg.size=14343
+file f221dc658a6719f97a32f45d983425782e75d849 chash=fc092d731f717756b24728c9115ff430fb1650c6 group=sys mode=0664 owner=root path=glassfish/modules/console-jdbc-plugin-l10n.jar pkg.csize=455200 pkg.size=488913
+file 8329e1c5d55fef3186f6bfbcc9e3b72274b06812 chash=056dc91475a06725198a35609297d49b7852dced group=sys mode=0664 owner=root path=glassfish/modules/jdbc-admin-l10n.jar pkg.csize=157278 pkg.size=168423

@@ -1,0 +1,3 @@
+file edc48e77fa93e93e97f8189e0819f2f0d8f396d1 chash=b58bdcf0a03b34beca1f324e201af5aa54e7eb1f group=sys mode=0664 owner=root path=glassfish/modules/ejb-container-l10n.jar pkg.csize=102970 pkg.size=116852
+file 8e54cc743c6fba964ad2abf108f61cdb2af4b69a chash=232cff4c08bd97dbc5ea55b87b27a178b592b265 group=sys mode=0664 owner=root path=glassfish/modules/gf-ejb-connector-l10n.jar pkg.csize=12028 pkg.size=14871
+file 9803990d0dabeeedc6c61f542d85fd28bd858e0d chash=155cf3bca9892df4ce834e1ecfd69b1f1d7f77fd group=sys mode=0664 owner=root path=glassfish/modules/console-ejb-lite-plugin-l10n.jar pkg.csize=120962 pkg.size=134851

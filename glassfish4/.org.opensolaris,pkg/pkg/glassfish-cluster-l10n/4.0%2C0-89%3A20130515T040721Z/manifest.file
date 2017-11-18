@@ -1,0 +1,3 @@
+file c761b4852444c3fa0fd879dd86c5c218101fc869 chash=59befe15dd0b9c7979b9edff1b058f8a613c02fe group=sys mode=0664 owner=root path=glassfish/modules/cluster-common-l10n.jar pkg.csize=40914 pkg.size=51309
+file 867c6c95e15fb81b7dae80be7e547b714b357d01 chash=b69a28c2d7942d5a5e8959142b272b05758244e9 group=sys mode=0664 owner=root path=glassfish/modules/cluster-cli-l10n.jar pkg.csize=370468 pkg.size=394243
+file e8103389aa4fc11bc399325082cb7a13eeb0671d chash=8ba50705804cfe0d141b554ba397f0f27378d9ba group=sys mode=0664 owner=root path=glassfish/modules/cluster-admin-l10n.jar pkg.csize=524549 pkg.size=571077

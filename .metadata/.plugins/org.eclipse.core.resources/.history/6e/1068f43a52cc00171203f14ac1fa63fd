@@ -1,0 +1,17 @@
+package de.randomerror.autofinanzierung;
+
+import javax.ejb.Stateless;
+
+import de.randomerror.autofinanzierung.Local.HelloWorldLocal;
+import de.randomerror.autofinanzierung.Remote.HelloWorldRemote;
+
+@Stateless
+public class HelloWorldBean implements HelloWorldLocal, HelloWorldRemote {
+
+	@Override
+	public String hello() {
+		return "Hello World!";
+	}
+	
+	
+}

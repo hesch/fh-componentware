@@ -1,0 +1,51 @@
+package de.randomerror.autofinanzierung;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import de.fh_dortmund.inf.cw.car_financing.client.shared.CarFinancingHandler;
+import de.fh_dortmund.inf.cw.car_financing.client.shared.ServiceHandler;
+
+public class ServiceHandlerImpl extends ServiceHandler implements CarFinancingHandler {
+	private static ServiceHandler instance = new ServiceHandlerImpl();
+	public static ServiceHandler getInstance() {return instance;}
+
+	private Context ctx;
+	
+	CarFinancingHandlerRemote handler;
+	
+	private ServiceHandlerImpl() {
+		try {
+			ctx = new InitialContext();
+			
+			String beanName = "java:global/autofinanzierungEAR/autofinanzierung/CarFinancingHandlerBean!de.randomerror.autofinanzierung.CarFinancingHandlerRemote";
+			handler = (CarFinancingHandlerRemote) ctx.lookup(beanName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	@Override
+	public double computeGrossLoanAmount(double price, double arg1, int paymentTerm) {
+		return handler.computeGrossLoanAmount(price, arg1, paymentTerm);
+	}
+
+	@Override
+	public double computeMonthlyPayment(double arg0, double arg1, int arg2) {
+		return handler.computeMonthlyPayment(arg0, arg1, arg2);
+	}
+
+	@Override
+	public double computeNetLoanAmount(double arg0, double arg1) {
+		return handler.computeNetLoanAmount(arg0, arg1);
+	}
+
+	@Override
+	public double getInterestRate() {
+		return handler.getInterestRate();
+	}
+
+}

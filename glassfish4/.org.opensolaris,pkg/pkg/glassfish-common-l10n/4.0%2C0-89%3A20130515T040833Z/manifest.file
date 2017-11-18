@@ -1,0 +1,5 @@
+file 5c5326c04f626bde644ed61e9843b870d1b68a61 chash=a61121e3ae4e5a19bedefa468bc6444bfd64c362 group=sys mode=0664 owner=root path=glassfish/modules/security-l10n.jar pkg.csize=353554 pkg.size=409592
+file a5e4a11d9464be5edd52a36ffc463ce324a7878f chash=91aede10231c5b485735e7fa67cbb9b57d4f328f group=sys mode=0664 owner=root path=glassfish/modules/cluster-ssh-l10n.jar pkg.csize=26836 pkg.size=31630
+file 6ceaa00d2154816154ff6f93f76d878c80ac41b2 chash=3a4ba5451f627d128f12b1e41d3eb9d04a6a4c21 group=sys mode=0664 owner=root path=glassfish/modules/monitoring-core-l10n.jar pkg.csize=30536 pkg.size=38102
+file d70de71ea18e561e787392053a7fb7c5807d63ff chash=0007bf5649102fc1642c818dcaedbbca875f5bba group=sys mode=0664 owner=root path=glassfish/modules/glassfish-naming-l10n.jar pkg.csize=12819 pkg.size=15559
+file 447a5549fbddeb073dedc0018595a86a7071eae6 chash=c7def0ceb5eb7a5108a52e86d55b3c1d6f59723b group=sys mode=0664 owner=root path=glassfish/modules/gms-bootstrap-l10n.jar pkg.csize=12573 pkg.size=15230

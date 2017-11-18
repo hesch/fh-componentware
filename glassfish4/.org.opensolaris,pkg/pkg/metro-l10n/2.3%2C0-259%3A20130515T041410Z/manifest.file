@@ -1,0 +1,3 @@
+file cd666c60f2b12ad736b5b0f8298c73decbd7a481 chash=1f9078d564f5a10041ae41b06c33bfb9f2800c0d group=sys mode=0664 owner=root path=glassfish/modules/jsr109-impl-l10n.jar pkg.csize=32082 pkg.size=36347
+file fc70bb33d662d0c5c57b1aa6fa6f587b987c337c chash=9686da664d61917faa780f568a4c71fec98972f7 group=sys mode=0664 owner=root path=glassfish/modules/webservices.security-l10n.jar pkg.csize=15016 pkg.size=17950
+file c0d7d73ce38b176498ef2c7d32a5d57ad3fdfbef chash=b65dbc10b411f52c6b012b68b52b008b5ba15387 group=sys mode=0664 owner=root path=glassfish/modules/webservices-connector-l10n.jar pkg.csize=15656 pkg.size=19010

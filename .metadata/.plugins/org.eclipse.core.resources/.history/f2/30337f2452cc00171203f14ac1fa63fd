@@ -1,0 +1,10 @@
+package de.randomerror.autofinanzierung.Local;
+
+import javax.ejb.Local;
+
+import de.randomerror.autofinanzierung.HelloWorld;
+
+@Local
+public interface HelloWorldLocal extends HelloWorld {
+
+}

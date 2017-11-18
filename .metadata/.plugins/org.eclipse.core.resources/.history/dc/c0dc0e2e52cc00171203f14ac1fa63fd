@@ -1,0 +1,10 @@
+package de.randomerror.autofinanzierung.Local;
+
+import javax.ejb.Local;
+
+import de.randomerror.autofinanzierung.CarFinancingHandler;
+
+@Local
+public interface CarFinancingHandlerLocal extends CarFinancingHandler {
+
+}

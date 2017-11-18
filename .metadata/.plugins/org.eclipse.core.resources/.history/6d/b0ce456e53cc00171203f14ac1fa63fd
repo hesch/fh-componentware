@@ -1,0 +1,52 @@
+package de.randomerror.autofinanzierung;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import de.fh_dortmund.inf.cw.car_financing.client.shared.CarFinancingHandler;
+import de.fh_dortmund.inf.cw.car_financing.client.shared.ServiceHandler;
+
+public class ServiceHandlerImpl extends ServiceHandler implements CarFinancingHandler {
+	private static ServiceHandler instance = new ServiceHandlerImpl();
+	public static ServiceHandler getInstance() {return instance;}
+
+	private Context ctx;
+	
+	private ServiceHandlerImpl() {
+		try {
+			ctx = new InitialContext();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+	
+	@Override
+	public double computeGrossLoanAmount(double arg0, double arg1, int arg2) {
+		// TODO Auto-generated method stub
+		return 54321;
+	}
+
+	@Override
+	public double computeMonthlyPayment(double arg0, double arg1, int arg2) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double computeNetLoanAmount(double arg0, double arg1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getInterestRate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
