@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+<typeInfo handle="=autofinanzierung-common/ejbModule&lt;de.randomerror.autofinanzierung{CarFinancingHandlerLocal.java[CarFinancingHandlerLocal" modifiers="513" timestamp="1511003899000"/>
+<typeInfo handle="=autofinanzierung-common/ejbModule&lt;de.randomerror.autofinanzierung{CarFinancingHandlerRemote.java[CarFinancingHandlerRemote" modifiers="513" timestamp="1511003903000"/>
+</typeInfoHistroy>

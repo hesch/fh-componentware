@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="autofinanzierungEAR" key="LASTEARNAME_"/>
+	<item value="cw-chat-ear" key="LASTEARNAME_"/>
 	<list key="MRU_RUNTIME_STORE">
+		<item value="GlassFish 4"/>
 		<item value="NULL_RUNTIME"/>
 	</list>
 </section>

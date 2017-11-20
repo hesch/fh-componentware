@@ -1069,3 +1069,21 @@ java.lang.IllegalArgumentException: Invalid ejb jar autofinanzierung.jar: it con
 [2017-11-18T13:06:27.085+0100] [glassfish 4.0] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=34 _ThreadName=admin-listener(2)] [timeMillis: 1511006787085] [levelValue: 800] [[
   autofinanzierungEAR wurde erfolgreich bereitgestellt in 565 Millisekunden.]]
 
+[2017-11-18T14:07:37.372+0100] [glassfish 4.0] [INFO] [] [javax.enterprise.system.core] [tid: _ThreadID=186 _ThreadName=Thread-35] [timeMillis: 1511010457372] [levelValue: 800] [[
+  Server shutdown initiated]]
+
+[2017-11-18T14:07:37.376+0100] [glassfish 4.0] [INFO] [NCLS-BOOTSTRAP-00028] [javax.enterprise.bootstrap] [tid: _ThreadID=186 _ThreadName=Thread-35] [timeMillis: 1511010457376] [levelValue: 800] [[
+  Unregistered com.sun.enterprise.glassfish.bootstrap.osgi.EmbeddedOSGiGlassFishImpl@6d7677d8 from service registry.]]
+
+[2017-11-18T14:07:37.377+0100] [glassfish 4.0] [INFO] [] [] [tid: _ThreadID=186 _ThreadName=Thread-3] [timeMillis: 1511010457377] [levelValue: 800] [[
+  FileMonitoring shutdown]]
+
+[2017-11-18T14:07:37.384+0100] [glassfish 4.0] [INFO] [NCLS-JMX-00002] [javax.enterprise.system.jmx] [tid: _ThreadID=186 _ThreadName=Thread-35] [timeMillis: 1511010457384] [levelValue: 800] [[
+  JMXStartupService: Stopped JMXConnectorServer: null]]
+
+[2017-11-18T14:07:37.385+0100] [glassfish 4.0] [INFO] [NCLS-JMX-00001] [javax.enterprise.system.jmx] [tid: _ThreadID=186 _ThreadName=Thread-35] [timeMillis: 1511010457385] [levelValue: 800] [[
+  JMXStartupService and JMXConnectors have been shut down.]]
+
+[2017-11-18T14:07:37.522+0100] [glassfish 4.0] [INFO] [] [] [tid: _ThreadID=186 _ThreadName=Thread-3] [timeMillis: 1511010457522] [levelValue: 800] [[
+  JdbcRuntimeExtension,  getAllSystemRAResourcesAndPools = [GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcResource, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool, GlassFishConfigBean.org.glassfish.jdbc.config.JdbcConnectionPool]]]
+
