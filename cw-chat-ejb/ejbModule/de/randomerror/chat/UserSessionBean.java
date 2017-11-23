@@ -4,7 +4,9 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
 
+import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
 import de.randomerror.chat.entities.User;
+import de.randomerror.chat.interfaces.MessageProcessingLocal;
 import de.randomerror.chat.interfaces.UserManagementLocal;
 import de.randomerror.chat.interfaces.UserSessionLocal;
 import de.randomerror.chat.interfaces.UserSessionRemote;
@@ -15,6 +17,9 @@ public class UserSessionBean implements UserSessionLocal, UserSessionRemote {
 	
 	@Inject
 	private UserManagementLocal userManagement;
+	
+	@Inject
+	private MessageProcessingLocal messageProcessing;
 
 	@Override
 	public void changePassword(String oldPassword, String newPassword) {
@@ -40,7 +45,9 @@ public class UserSessionBean implements UserSessionLocal, UserSessionRemote {
 
 	@Override
 	public void login(String username, String password) {
-		user = userManagement.login(username, password);
+		User u = userManagement.login(username, password);
+		messageProcessing.broadcastDisconnectMessage(username);
+		user = u;
 	}
 
 	@Override

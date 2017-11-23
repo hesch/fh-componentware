@@ -1,5 +1,6 @@
 package de.randomerror.chat;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,11 +10,13 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
+import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessageType;
 import de.randomerror.chat.entities.User;
+import de.randomerror.chat.interfaces.MessageProcessingLocal;
 import de.randomerror.chat.interfaces.UserManagementLocal;
 import de.randomerror.chat.interfaces.UserManagementRemote;
 
-@Startup
 @Singleton
 public class UserManagementBean implements UserManagementLocal, UserManagementRemote {
 	private Map<String, User> database = new HashMap<>();
@@ -21,6 +24,9 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	
 	@Inject
 	private HashBean pwEnc;
+	
+	@Inject
+	private MessageProcessingLocal messageProcessing;
 	
 	public int getNumberOfRegisteredUser() {
 		return database.size();
@@ -31,6 +37,8 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		newUser.setUsername(username);
 		newUser.setPasswordHash(pwEnc.hash(password));
 		database.put(username, newUser);
+		
+		messageProcessing.broadcastMessage(ChatMessage.register(username));
 	}
 	
 	public User login(String username, String password) {
@@ -38,6 +46,9 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		if (!checkPassword(username, password))
 			throw new IllegalArgumentException();
 		loggedInUsers.add(u);
+		
+		messageProcessing.broadcastMessage(ChatMessage.login(username));
+		
 		return u;
 	}
 
@@ -45,6 +56,8 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	public void logout(String username) {
 		User u = getUser(username);
 		loggedInUsers.remove(u);
+		
+		messageProcessing.broadcastMessage(ChatMessage.logout(username));
 	}
 
 	@Override
