@@ -5,7 +5,7 @@ import java.util.List;
 import de.randomerror.chat.entities.User;
 
 public interface UserManagement {
-	void login(String username, String password);
+	void login(String username);
 	void logout(String username);
 	void register(String username, String password);
 	int getNumberOfRegisteredUsers();

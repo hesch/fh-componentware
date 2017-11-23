@@ -31,4 +31,8 @@
 <fullyQualifiedTypeName name="java.security.MessageDigest"/>
 <fullyQualifiedTypeName name="java.math.BigInteger"/>
 <fullyQualifiedTypeName name="javax.inject.Inject"/>
+<fullyQualifiedTypeName name="de.randomerror.chat.interfaces.UserSessionRemote"/>
+<fullyQualifiedTypeName name="de.randomerror.chat.interfaces.UserSessionLocal"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
 </qualifiedTypeNameHistroy>

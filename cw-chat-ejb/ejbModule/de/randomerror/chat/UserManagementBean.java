@@ -1,7 +1,9 @@
 package de.randomerror.chat;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -14,7 +16,8 @@ import de.randomerror.chat.interfaces.UserManagementRemote;
 @Startup
 @Singleton
 public class UserManagementBean implements UserManagementLocal, UserManagementRemote {
-	private List<User> database = new LinkedList<>();
+	private Map<String, User> database = new HashMap<>();
+	private List<User> loggedInUsers = new LinkedList<>();
 	
 	@Inject
 	private HashBean pwEnc;
@@ -27,17 +30,18 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		User newUser = new User();
 		newUser.setUsername(username);
 		newUser.setPasswordHash(pwEnc.hash(password));
-		database.add(newUser);
+		database.put(username, newUser);
 	}
 	
-	public void login(String username, String password) {
-		
+	public void login(String username) {
+		User u = getUser(username);
+		loggedInUsers.add(u);
 	}
 
 	@Override
 	public void logout(String username) {
-		// TODO Auto-generated method stub
-		
+		User u = getUser(username);
+		loggedInUsers.remove(u);
 	}
 
 	@Override
@@ -47,7 +51,7 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 
 	@Override
 	public List<User> getOnlineUsers() {
-		return null;
+		return loggedInUsers;
 	}
 
 	@Override
@@ -57,12 +61,12 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 
 	@Override
 	public void deleteUser(String username) {
-		
+		User u = getUser(username);
+		database.remove(u);
 	}
 
 	@Override
 	public User getUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return database.get(username);
 	}
 }

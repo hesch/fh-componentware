@@ -799,3 +799,76 @@ java.lang.NullPointerException
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1472)
+!SESSION 2017-11-20 18:50:52.971 -----------------------------------------------
+eclipse.buildId=4.7.1.M20171009-0410
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2017-11-20 18:51:08.896
+!MESSAGE Plugin org.eclipse.jst.jee, extension org.eclipse.jst.j2ee.J2EEModelProvider
+Version 8.0 of project facet jst.ear does not exist.
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2017-11-20 18:51:08.907
+!MESSAGE Version 8.0 of project facet jst.ear does not exist.
+!STACK 0
+java.lang.IllegalArgumentException: Version 8.0 of project facet jst.ear does not exist.
+	at org.eclipse.wst.common.project.facet.core.util.internal.Versionable.getVersion(Versionable.java:80)
+	at org.eclipse.wst.common.project.facet.core.internal.ProjectFacet.getVersion(ProjectFacet.java:1)
+	at org.eclipse.jst.j2ee.model.J2EEModelProviderRegistry.readElement(J2EEModelProviderRegistry.java:85)
+	at org.eclipse.wst.common.core.util.RegistryReader.internalReadElement(RegistryReader.java:81)
+	at org.eclipse.wst.common.core.util.RegistryReader.readRegistry(RegistryReader.java:122)
+	at org.eclipse.jst.j2ee.model.J2EEModelProviderRegistry.getInstance(J2EEModelProviderRegistry.java:43)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.initProviders(ModelProviderManager.java:262)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getProviders(ModelProviderManager.java:338)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getProvider(ModelProviderManager.java:223)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getModelProvider(ModelProviderManager.java:93)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getModelProvider(ModelProviderManager.java:281)
+	at org.eclipse.jst.j2ee.project.EarUtilities.getEARLibDir(EarUtilities.java:503)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.getBaseEARLibRefs(J2EEComponentClasspathContainer.java:417)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.requiresUpdate(J2EEComponentClasspathContainer.java:208)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.refresh(J2EEComponentClasspathContainer.java:540)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.refresh(J2EEComponentClasspathContainer.java:546)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer$1.run(J2EEComponentClasspathContainer.java:521)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2017-11-20 18:51:08.909
+!MESSAGE Plugin org.eclipse.jst.jee, extension org.eclipse.jst.j2ee.J2EEModelProvider
+Version 8.0 of project facet jst.appclient does not exist.
+
+!ENTRY org.eclipse.jst.j2ee 4 0 2017-11-20 18:51:08.909
+!MESSAGE Version 8.0 of project facet jst.appclient does not exist.
+!STACK 0
+java.lang.IllegalArgumentException: Version 8.0 of project facet jst.appclient does not exist.
+	at org.eclipse.wst.common.project.facet.core.util.internal.Versionable.getVersion(Versionable.java:80)
+	at org.eclipse.wst.common.project.facet.core.internal.ProjectFacet.getVersion(ProjectFacet.java:1)
+	at org.eclipse.jst.j2ee.model.J2EEModelProviderRegistry.readElement(J2EEModelProviderRegistry.java:85)
+	at org.eclipse.wst.common.core.util.RegistryReader.internalReadElement(RegistryReader.java:81)
+	at org.eclipse.wst.common.core.util.RegistryReader.readRegistry(RegistryReader.java:122)
+	at org.eclipse.jst.j2ee.model.J2EEModelProviderRegistry.getInstance(J2EEModelProviderRegistry.java:43)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.initProviders(ModelProviderManager.java:262)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getProviders(ModelProviderManager.java:338)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getProvider(ModelProviderManager.java:223)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getModelProvider(ModelProviderManager.java:93)
+	at org.eclipse.jst.j2ee.model.ModelProviderManager.getModelProvider(ModelProviderManager.java:281)
+	at org.eclipse.jst.j2ee.project.EarUtilities.getEARLibDir(EarUtilities.java:503)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.getBaseEARLibRefs(J2EEComponentClasspathContainer.java:417)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.requiresUpdate(J2EEComponentClasspathContainer.java:208)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.refresh(J2EEComponentClasspathContainer.java:540)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer.refresh(J2EEComponentClasspathContainer.java:546)
+	at org.eclipse.jst.j2ee.internal.common.classpath.J2EEComponentClasspathContainer$1.run(J2EEComponentClasspathContainer.java:521)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.jface.text 2 0 2017-11-20 18:53:30.503
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-11-20 18:53:30.503
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-11-20 18:54:21.725
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-11-20 18:54:21.725
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
