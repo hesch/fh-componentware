@@ -25,7 +25,7 @@ public class HashBean {
 	
 	
 	public String hash(String str) {
-		return String.format("", new BigInteger(1, encoder.digest(str.getBytes())));
+		return String.format("%040x", new BigInteger(1, encoder.digest(str.getBytes())));
 	}
 
 }

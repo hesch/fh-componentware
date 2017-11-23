@@ -33,9 +33,12 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		database.put(username, newUser);
 	}
 	
-	public void login(String username) {
+	public User login(String username, String password) {
 		User u = getUser(username);
+		if (!checkPassword(username, password))
+			throw new IllegalArgumentException();
 		loggedInUsers.add(u);
+		return u;
 	}
 
 	@Override
@@ -68,5 +71,10 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	@Override
 	public User getUser(String username) {
 		return database.get(username);
+	}
+
+	@Override
+	public boolean checkPassword(String username, String password) {
+		return database.get(username).getPasswordHash().equals(pwEnc.hash(password));
 	}
 }
