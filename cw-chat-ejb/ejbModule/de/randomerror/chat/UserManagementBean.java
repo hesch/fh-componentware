@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessageType;
 import de.randomerror.chat.entities.User;
-import de.randomerror.chat.interfaces.MessageProcessingLocal;
+import de.randomerror.chat.interfaces.BroadcastingLocal;
 import de.randomerror.chat.interfaces.UserManagementLocal;
 import de.randomerror.chat.interfaces.UserManagementRemote;
 
@@ -26,7 +26,7 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	private HashBean pwEnc;
 	
 	@Inject
-	private MessageProcessingLocal messageProcessing;
+	private BroadcastingLocal broadcast;
 	
 	public int getNumberOfRegisteredUser() {
 		return database.size();
@@ -38,7 +38,7 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		newUser.setPasswordHash(pwEnc.hash(password));
 		database.put(username, newUser);
 		
-		messageProcessing.broadcastMessage(ChatMessage.register(username));
+		broadcast.broadcastMessage(ChatMessage.register(username));
 	}
 	
 	public User login(String username, String password) {
@@ -47,7 +47,7 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 			throw new IllegalArgumentException();
 		loggedInUsers.add(u);
 		
-		messageProcessing.broadcastMessage(ChatMessage.login(username));
+		broadcast.broadcastMessage(ChatMessage.login(username));
 		
 		return u;
 	}
@@ -57,7 +57,7 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		User u = getUser(username);
 		loggedInUsers.remove(u);
 		
-		messageProcessing.broadcastMessage(ChatMessage.logout(username));
+		broadcast.broadcastMessage(ChatMessage.logout(username));
 	}
 
 	@Override

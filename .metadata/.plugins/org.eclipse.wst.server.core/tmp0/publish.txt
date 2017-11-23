@@ -1,4 +1,5 @@
 #GlassFish 3
-#Sat Nov 18 13:06:27 CET 2017
+#Thu Nov 23 20:49:36 CET 2017
+org.eclipse.jst.jee.server\:cw-chat-ear=/home/henri/workspace/glassfish4/glassfish/domains/domain1/eclipseApps/cw-chat-ear
 org.eclipse.jst.jee.server\:WelcomeClient-ear=/home/henri/workspace/glassfish4/glassfish/domains/domain1/eclipseApps/WelcomeClient-ear
 org.eclipse.jst.jee.server\:autofinanzierungEAR=/home/henri/workspace/glassfish4/glassfish/domains/domain1/eclipseApps/autofinanzierungEAR

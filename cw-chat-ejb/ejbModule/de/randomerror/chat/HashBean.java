@@ -19,8 +19,12 @@ public class HashBean {
 	private MessageDigest encoder;
 	
 	@PostConstruct
-	public void init() throws NoSuchAlgorithmException {
-		encoder = MessageDigest.getInstance(algorithm);
+	public void init() {
+		try {
+			encoder = MessageDigest.getInstance(algorithm);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

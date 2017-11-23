@@ -4,7 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
+import javax.jms.JMSException;
 import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
+import javax.jms.Queue;
+import javax.jms.TextMessage;
+import javax.jms.Topic;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -16,50 +24,56 @@ import de.randomerror.chat.entities.User;
 import de.randomerror.chat.interfaces.UserManagementRemote;
 import de.randomerror.chat.interfaces.UserSessionRemote;
 
-public class ServiceHandlerImpl extends ServiceHandler implements UserSessionHandler, ChatMessageHandler, MessageListener {
+public class ServiceHandlerImpl extends ServiceHandler
+		implements UserSessionHandler, ChatMessageHandler, MessageListener {
 
 	private static ServiceHandler instance = new ServiceHandlerImpl();
-	public static ServiceHandler getInstance() { return instance; }
-	
+
+	public static ServiceHandler getInstance() {
+		return instance;
+	}
+
 	private Context ctx;
-	private JmsContext jmsContext;
-	
+	private JMSContext jmsContext;
+
 	private Queue messageQueue;
 	private Topic messageTopic;
 	private Topic disconnectTopic;
-	
+
 	private UserManagementRemote userManagement;
 	private UserSessionRemote userSession;
-	
+
 	private ServiceHandlerImpl() {
 		try {
 			ctx = new InitialContext();
-			
-			userManagement = (UserManagementRemote) ctx.lookup("");
-			userSession = (UserSessionRemote) ctx.lookup("");
-			
+
+			userManagement = (UserManagementRemote) ctx.lookup(
+					"java:global/cw-chat-ear/cw-chat-ejb/UserManagementBean!de.randomerror.chat.interfaces.UserManagementRemote");
+			userSession = (UserSessionRemote) ctx.lookup(
+					"java:global/cw-chat-ear/cw-chat-ejb/UserSessionBean!de.randomerror.chat.interfaces.UserSessionRemote");
+
 			setupJms();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void setupJms() {
-		try {
-			ConnectionFactory connectionFactory = (ConnectionFactory) ctx.lookup("java:comp/DefaultJmsConnectionFactory");
-			jmsContext = connectionFactory.createContext();
-			
-			messageQueue = (Queue) ctx.lookup("java:global/jms/MessageQueue");
-			
-			messageTopic = (Topic) ctx.lookup("java:global/jms/MessageTopic");
-			disconnectTopic = (Topic) ctx.lookup("java:global/jms/DisconnectTopic");
-			jmsContext.createConsumer(messageTopic).setMessageListener(this);
-			jmsContext.createConsumer(disconnectTopic, "SENDER is " + getUserName()).setMessageListener(this);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void setupJms() {
+		try {
+			ConnectionFactory connectionFactory = (ConnectionFactory) ctx
+					.lookup("java:comp/DefaultJMSConnectionFactory");
+			jmsContext = connectionFactory.createContext();
+
+			messageQueue = (Queue) ctx.lookup("java:global/jms/MessageQueue");
+
+			messageTopic = (Topic) ctx.lookup("java:global/jms/MessageTopic");
+			disconnectTopic = (Topic) ctx.lookup("java:global/jms/DisconnectTopic");
+			jmsContext.createConsumer(messageTopic).setMessageListener(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void changePassword(String oldPassword, String newPassword) throws Exception {
 		userSession.changePassword(oldPassword, newPassword);
@@ -87,11 +101,7 @@ public class ServiceHandlerImpl extends ServiceHandler implements UserSessionHan
 
 	@Override
 	public List<String> getOnlineUsers() {
-		return userManagement
-				.getOnlineUsers()
-				.stream()
-				.map(User::getUsername)
-				.collect(Collectors.toList());
+		return userManagement.getOnlineUsers().stream().map(User::getUsername).collect(Collectors.toList());
 	}
 
 	@Override
@@ -102,6 +112,7 @@ public class ServiceHandlerImpl extends ServiceHandler implements UserSessionHan
 	@Override
 	public void login(String username, String password) throws Exception {
 		userSession.login(username, password);
+		jmsContext.createConsumer(disconnectTopic, "SENDER = '" + getUserName() + "'").setMessageListener(this);
 	}
 
 	@Override
@@ -116,19 +127,32 @@ public class ServiceHandlerImpl extends ServiceHandler implements UserSessionHan
 
 	@Override
 	public void sendChatMessage(String message) {
-		String username = getUserName();
-		
-		TextMessage jmsMessage = jmsContext.createTextMessage(message);
-		jmsMessage.setStringProperty("USER", username);
-		jmsContext.createProducer().send(messageQueue, jmsMessage);
+		try {
+			String username = getUserName();
+
+			TextMessage jmsMessage = jmsContext.createTextMessage(message);
+
+			jmsMessage.setStringProperty("USER", username);
+
+			jmsContext.createProducer().send(messageQueue, jmsMessage);
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	@Override
 	public void onMessage(Message message) {
-		ObjectMessage objectMessage = (ObjectMessage) message;
-		ChatMessage chatMessage = objectMessage.getObject(ChatMessage.class);
-		
-		notifyObservers(chatMessage);
+		try {
+			ObjectMessage objectMessage = (ObjectMessage) message;
+			ChatMessage chatMessage = (ChatMessage) objectMessage.getObject();
+			
+			System.out.println("message received: " + chatMessage.getType().getValue());
+			
+			setChanged();
+			notifyObservers(chatMessage);
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

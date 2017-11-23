@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="/home/henri/workspace/ChatClientUI/ChatClientUI_libs/lib/javassist.jar"/>
 	<classpathentry kind="lib" path="/home/henri/workspace/ChatClientUI/ChatClientUI_libs/lib/junit-4.11.jar"/>
 	<classpathentry kind="lib" path="/home/henri/workspace/ChatClientUI/ChatClientUI_libs/lib/reflections-0.9.9-RC1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cw-chat-common"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

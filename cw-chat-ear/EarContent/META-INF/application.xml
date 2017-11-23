@@ -8,9 +8,6 @@
 <module>
 	<ejb>cw-chat-ejb.jar</ejb>
 </module>
-<module>
-	<ejb>cw-chat-common.jar</ejb>
-</module>
 
 <jms-destination>
 	<name>java:global/jms/MessageTopic</name>

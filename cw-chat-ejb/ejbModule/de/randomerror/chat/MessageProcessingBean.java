@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
@@ -18,20 +19,16 @@ import javax.jms.Topic;
 
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessageType;
-import de.randomerror.chat.interfaces.MessageProcessingLocal;
-import de.randomerror.chat.interfaces.MessageProcessingRemote;
+import de.randomerror.chat.interfaces.BroadcastingLocal;
+import de.randomerror.chat.interfaces.BroadcastingRemote;
 
-@MessageDriven(mappedName="MessageQueue")
-public class MessageProcessingBean implements MessageProcessingLocal, MessageProcessingRemote, MessageListener {
+@MessageDriven(mappedName="java:global/jms/MessageQueue", messageListenerInterface=MessageListener.class, activationConfig= {
+		@ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Queue")
+})
+public class MessageProcessingBean implements MessageListener {
 
 	@Inject
-	private JMSContext context;
-	
-	@Resource(lookup="java:global/jms/MessageTopic")
-	private Topic messageTopic;
-	
-	@Resource(lookup="java:global/jms/DisconnectTopic")
-	private Topic disconnectTopic;
+	private BroadcastingLocal broadcast;
 	
 	private List<String> blacklist = new LinkedList<String>() {{
 		add("test");
@@ -40,11 +37,13 @@ public class MessageProcessingBean implements MessageProcessingLocal, MessagePro
 	@Override
 	public void onMessage(Message message) {
 		try {
+			System.out.println("message received");
 			TextMessage textMessage = (TextMessage) message;
 			String msg = textMessage.getText();
-			blacklist.forEach(word -> {
-				msg.replace(word, "***");
-			});
+			
+			for(String word: blacklist) {
+				msg = msg.replace(word, "***");
+			}
 			
 			ChatMessage chatMessage = new ChatMessage();
 			chatMessage.setText(msg);
@@ -52,32 +51,10 @@ public class MessageProcessingBean implements MessageProcessingLocal, MessagePro
 			chatMessage.setSender(textMessage.getStringProperty("USER"));
 			chatMessage.setType(ChatMessageType.TEXT);
 			
-			broadcastMessage(chatMessage);
+			broadcast.broadcastMessage(chatMessage);
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	@Override
-	public void broadcastMessage(ChatMessage msg) {
-		try {
-			ObjectMessage message = context.createObjectMessage();
-			message.setObject(msg);
-			context.createProducer().send(messageTopic, message);
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void broadcastDisconnectMessage(String sender) {
-		try {
-			ObjectMessage message = context.createObjectMessage();
-			message.setObject(ChatMessage.disconnect(sender));
-			message.setStringProperty("SENDER", sender);
-			context.createProducer().send(disconnectTopic, message);
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
-	}
+
 }

@@ -85,6 +85,7 @@
       <ejb-container>
         <ejb-timer-service></ejb-timer-service>
       </ejb-container>
+      <mdb-container></mdb-container>
       <diagnostic-service></diagnostic-service>
       <security-service>
         <auth-realm classname="com.sun.enterprise.security.auth.realm.file.FileRealm" name="admin-realm">
