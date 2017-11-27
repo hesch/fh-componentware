@@ -3,15 +3,14 @@ package de.randomerror.chat.interfaces;
 import java.util.List;
 
 import de.randomerror.chat.entities.User;
+import de.randomerrror.chat.exceptions.AuthenticationFailedException;
+import de.randomerrror.chat.exceptions.UserAlreadyExistsException;
+import de.randomerrror.chat.exceptions.UserNotFoundException;
 
 public interface UserManagement {
-	User login(String username, String password);
-	void logout(String username);
-	void register(String username, String password);
-	int getNumberOfRegisteredUsers();
+	void register(String username, String password) throws UserAlreadyExistsException;
 	List<User> getOnlineUsers();
-	void changeUserPassword(String username, String newPassword);
-	void deleteUser(String username);
-	User getUser(String username);
+	int getNumberOfRegisteredUsers();
 	
+	void nuke();
 }

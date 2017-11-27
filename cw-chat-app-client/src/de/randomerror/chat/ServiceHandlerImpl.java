@@ -18,19 +18,29 @@ import javax.naming.InitialContext;
 
 import de.fh_dortmund.inf.cw.chat.client.shared.ChatMessageHandler;
 import de.fh_dortmund.inf.cw.chat.client.shared.ServiceHandler;
+import de.fh_dortmund.inf.cw.chat.client.shared.StatisticHandler;
 import de.fh_dortmund.inf.cw.chat.client.shared.UserSessionHandler;
+import de.fh_dortmund.inf.cw.chat.server.entities.CommonStatistic;
+import de.fh_dortmund.inf.cw.chat.server.entities.UserStatistic;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
 import de.randomerror.chat.entities.User;
+import de.randomerror.chat.interfaces.StatisticManagementRemote;
 import de.randomerror.chat.interfaces.UserManagementRemote;
 import de.randomerror.chat.interfaces.UserSessionRemote;
+import de.randomerrror.chat.exceptions.NotAuthenticatedException;
+import de.randomerrror.chat.exceptions.UserNotFoundException;
 
 public class ServiceHandlerImpl extends ServiceHandler
-		implements UserSessionHandler, ChatMessageHandler, MessageListener {
+		implements UserSessionHandler, ChatMessageHandler, MessageListener, StatisticHandler {
 
 	private static ServiceHandler instance = new ServiceHandlerImpl();
 
 	public static ServiceHandler getInstance() {
 		return instance;
+	}
+	
+	public static void reinit() {
+		instance = new ServiceHandlerImpl();
 	}
 
 	private Context ctx;
@@ -42,6 +52,7 @@ public class ServiceHandlerImpl extends ServiceHandler
 
 	private UserManagementRemote userManagement;
 	private UserSessionRemote userSession;
+	private StatisticManagementRemote statistics;
 
 	private ServiceHandlerImpl() {
 		try {
@@ -51,6 +62,8 @@ public class ServiceHandlerImpl extends ServiceHandler
 					"java:global/cw-chat-ear/cw-chat-ejb/UserManagementBean!de.randomerror.chat.interfaces.UserManagementRemote");
 			userSession = (UserSessionRemote) ctx.lookup(
 					"java:global/cw-chat-ear/cw-chat-ejb/UserSessionBean!de.randomerror.chat.interfaces.UserSessionRemote");
+			statistics = (StatisticManagementRemote) ctx.lookup(
+					"java:global/cw-chat-ear/cw-chat-ejb/StatisticManagementBean!de.randomerror.chat.interfaces.StatisticManagementRemote");
 
 			setupJms();
 		} catch (Exception e) {
@@ -86,7 +99,11 @@ public class ServiceHandlerImpl extends ServiceHandler
 
 	@Override
 	public void disconnect() {
-		userSession.logout();
+		try {
+			userSession.logout();
+		} catch (NotAuthenticatedException | UserNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -106,7 +123,12 @@ public class ServiceHandlerImpl extends ServiceHandler
 
 	@Override
 	public String getUserName() {
-		return userSession.getUserName();
+		try {
+			return userSession.getUserName();
+		} catch (NotAuthenticatedException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	@Override
@@ -153,6 +175,26 @@ public class ServiceHandlerImpl extends ServiceHandler
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void nuke() {
+		userManagement.nuke();
+	}
+
+	@Override
+	public List<CommonStatistic> getStatistics() {
+		return statistics.getStatistics();
+	}
+
+	@Override
+	public UserStatistic getUserStatistic() {
+		try {
+			return userSession.getUserStatistic();
+		} catch (NotAuthenticatedException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

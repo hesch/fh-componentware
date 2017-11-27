@@ -3,6 +3,8 @@ package de.fh_dortmund.inf.cw.chat.server.shared;
 import java.io.Serializable;
 import java.util.Date;
 
+import de.fh_dortmund.inf.cw.chat.server.entities.CommonStatistic;
+
 
 public class ChatMessage implements Serializable {
 	private String text;
@@ -54,6 +56,26 @@ public class ChatMessage implements Serializable {
 		return message;
 	}
 	
+	public static ChatMessage statistic(CommonStatistic halfHourStatistic) {
+		ChatMessage message = new ChatMessage();
+		
+		String chatText = String.format(
+				"Statistik der letzten halben Stunde:\n" +
+				"Anzahl der Anmeldungen: %d\n" +
+				"Anzahl der Abmeldungen: %d\n" +
+				"Anzahl der geschriebenen Nachrichten: %d",
+				halfHourStatistic.getLogins(),
+				halfHourStatistic.getLogouts(),
+				halfHourStatistic.getMessages());
+		
+		message.setSender("Statistik");
+		message.setDate(new Date());
+		message.setText(chatText);
+		message.setType(ChatMessageType.STATISTIC);
+		
+		return message;
+	}
+	
 	public String getText() {
 		return text;
 	}
@@ -78,4 +100,6 @@ public class ChatMessage implements Serializable {
 	public void setType(ChatMessageType type) {
 		this.type = type;
 	}
+
+	
 }

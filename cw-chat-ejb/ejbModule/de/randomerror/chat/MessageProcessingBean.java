@@ -21,6 +21,8 @@ import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessageType;
 import de.randomerror.chat.interfaces.BroadcastingLocal;
 import de.randomerror.chat.interfaces.BroadcastingRemote;
+import de.randomerror.chat.interfaces.StatisticManagementLocal;
+import de.randomerror.chat.interfaces.UserManagementLocal;
 
 @MessageDriven(mappedName="java:global/jms/MessageQueue", messageListenerInterface=MessageListener.class, activationConfig= {
 		@ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Queue")
@@ -29,6 +31,12 @@ public class MessageProcessingBean implements MessageListener {
 
 	@Inject
 	private BroadcastingLocal broadcast;
+
+	@Inject
+	private StatisticManagementLocal statistics;
+	
+	@Inject
+	private UserManagementLocal userManagement;
 	
 	private List<String> blacklist = new LinkedList<String>() {{
 		add("test");
@@ -37,7 +45,6 @@ public class MessageProcessingBean implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		try {
-			System.out.println("message received");
 			TextMessage textMessage = (TextMessage) message;
 			String msg = textMessage.getText();
 			
@@ -50,6 +57,9 @@ public class MessageProcessingBean implements MessageListener {
 			chatMessage.setDate(new Date());
 			chatMessage.setSender(textMessage.getStringProperty("USER"));
 			chatMessage.setType(ChatMessageType.TEXT);
+			
+			statistics.newMessage();
+			userManagement.countMessage(textMessage.getStringProperty("USER"));
 			
 			broadcast.broadcastMessage(chatMessage);
 		} catch (JMSException e) {
