@@ -1,2 +1,3 @@
-/.metadata/
-/.recommenders/
+.metadata/
+.recommenders/
+glassfish4/glassfish/domains/
