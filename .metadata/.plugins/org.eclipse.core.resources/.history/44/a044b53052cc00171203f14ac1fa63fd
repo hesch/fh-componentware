@@ -1,8 +1,0 @@
-package de.randomerror.autofinanzierung.Remote;
-
-import javax.ejb.Remote;
-
-@Remote
-public interface CarFinancingHandlerRemote extends CarFinancingHandler {
-
-}

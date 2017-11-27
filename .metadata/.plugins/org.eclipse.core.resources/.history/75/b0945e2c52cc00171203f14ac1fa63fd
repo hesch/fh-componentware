@@ -1,5 +1,0 @@
-package de.randomerror.autofinanzierung.Local;
-
-public interface CarFinancingHandlerLocal {
-
-}
