@@ -11,11 +11,17 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import de.fh_dortmund.inf.cw.chat.server.entities.CommonStatistic;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
@@ -23,11 +29,13 @@ import de.randomerror.chat.interfaces.BroadcastingLocal;
 import de.randomerror.chat.interfaces.StatisticManagementLocal;
 import de.randomerror.chat.interfaces.StatisticManagementRemote;
 
-@Singleton
+@Stateless
 public class StatisticManagementBean implements StatisticManagementLocal, StatisticManagementRemote {
-
-	private List<CommonStatistic> statistics = new LinkedList<>();
-	private CommonStatistic current;
+	
+	private static final String HALF_HOUR_TIMER_INFO = "halfHourTimer";
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	@Inject
 	private BroadcastingLocal broadcast;
@@ -35,44 +43,63 @@ public class StatisticManagementBean implements StatisticManagementLocal, Statis
 	@Resource
 	private TimerService timerService;
 	
-	private Timer halfHourTimer;
-	private CommonStatistic halfHourStatistic = new CommonStatistic();
-	
 	@PostConstruct
 	public void init() {
-		current = new CommonStatistic();
-		current.setStartingDate(new Date());
+		try {
+			getCurrent();
+		} catch(NoResultException e) {
+			CommonStatistic current = new CommonStatistic();
+			current.setStartingDate(new Date());
+			entityManager.persist(current);
+		}
+	}
+	
+	private CommonStatistic getCurrent() {
+		return entityManager.createNamedQuery("CommonStatistic.findMostRecent", CommonStatistic.class).getSingleResult();
 	}
 	
 	@Override
 	public List<CommonStatistic> getStatistics() {
-		return statistics;
+		TypedQuery<CommonStatistic> q = entityManager.createNamedQuery("CommonStatistic.findAll", CommonStatistic.class);
+		return q.getResultList();
 	}
 	
-	@Schedule(hour="*")
+	@Schedule(minute="*", hour="*")
 	public void newCommonStatistic(Timer timer) {
+		CommonStatistic current = getCurrent();
+		entityManager.lock(current, LockModeType.PESSIMISTIC_WRITE);
 		current.setEndDate(new Date());
-		statistics.add(current);
-		current = new CommonStatistic();
-		current.setStartingDate(new Date());
+		
+		entityManager.merge(current);
+		
+		CommonStatistic newStat = new CommonStatistic();
+		newStat.setStartingDate(new Date());
+		
+		entityManager.persist(newStat);
 	}
 	
 	@Override
 	public void newLogin() {
+		CommonStatistic current = getCurrent();
+		entityManager.lock(current, LockModeType.PESSIMISTIC_WRITE);
 		current.setLogins(current.getLogins() + 1);
-		halfHourStatistic.setLogins(halfHourStatistic.getLogins() + 1);
+		entityManager.merge(current);
 	}
 	
 	@Override
 	public void newLogout() {
+		CommonStatistic current = getCurrent();
+		entityManager.lock(current, LockModeType.PESSIMISTIC_WRITE);
 		current.setLogouts(current.getLogouts() + 1);
-		halfHourStatistic.setLogouts(halfHourStatistic.getLogouts() + 1);
+		entityManager.merge(current);
 	}
 	
 	@Override
 	public void newMessage() {
+		CommonStatistic current = getCurrent();
+		entityManager.lock(current, LockModeType.PESSIMISTIC_WRITE);
 		current.setMessages(current.getMessages() + 1);
-		halfHourStatistic.setMessages(halfHourStatistic.getMessages() + 1);
+		entityManager.merge(current);
 	}
 
 	@Override
@@ -87,18 +114,33 @@ public class StatisticManagementBean implements StatisticManagementLocal, Statis
 		now = now.withSecond(0);
 		Date offset = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
 		
-		halfHourTimer = timerService.createIntervalTimer(offset, 1000*60*30, new TimerConfig());
+		timerService.createIntervalTimer(0, 1000*60*30 /30/2, new TimerConfig(HALF_HOUR_TIMER_INFO, false));
 	}
 	
 	@Override
 	public void stopStatisticTimer() {
-		halfHourTimer.cancel();
+		for(Timer t : timerService.getTimers()) {
+			if(t.getInfo().equals(HALF_HOUR_TIMER_INFO)) {
+				t.cancel();
+				break;
+			}
+		}
 	}
 	
 	@Timeout
 	public void halfOurTimerExpried() {
-		broadcast.broadcastMessage(ChatMessage.statistic(halfHourStatistic));
+		TypedQuery<CommonStatistic> q = entityManager.createNamedQuery("CommonStatistic.findAllSorted", CommonStatistic.class);
+		List<CommonStatistic> l = q.getResultList();
 		
-		halfHourStatistic = new CommonStatistic();
+		Date fiveMinutesAgo = new Date(System.currentTimeMillis()-5*60*1000);
+		
+		CommonStatistic halfHourStatistic;
+		if(fiveMinutesAgo.before(l.get(0).getStartingDate()) && l.size() > 1)
+			halfHourStatistic = l.get(1);
+		else
+			halfHourStatistic = l.get(0);
+			
+
+		broadcast.broadcastMessage(ChatMessage.statistic(halfHourStatistic));
 	}
 }

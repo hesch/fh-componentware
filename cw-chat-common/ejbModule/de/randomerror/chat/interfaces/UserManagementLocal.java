@@ -8,7 +8,7 @@ import de.randomerrror.chat.exceptions.UserNotFoundException;
 
 @Local
 public interface UserManagementLocal extends UserManagement {
-	boolean checkPassword(String username, String password);
+	boolean checkPassword(String username, String password) throws UserNotFoundException;
 	User login(String username, String password) throws AuthenticationFailedException, UserNotFoundException;
 	void logout(String username) throws UserNotFoundException;
 	void changeUserPassword(String username, String newPassword) throws UserNotFoundException;

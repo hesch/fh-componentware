@@ -6,8 +6,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import de.fh_dortmund.inf.cw.chat.server.entities.UserStatistic;
 import de.fh_dortmund.inf.cw.chat.server.shared.ChatMessage;
@@ -20,10 +28,11 @@ import de.randomerrror.chat.exceptions.AuthenticationFailedException;
 import de.randomerrror.chat.exceptions.UserAlreadyExistsException;
 import de.randomerrror.chat.exceptions.UserNotFoundException;
 
-@Singleton
+@Stateless
 public class UserManagementBean implements UserManagementLocal, UserManagementRemote {
-	private Map<String, User> database = new HashMap<>();
-	private List<User> loggedInUsers = new LinkedList<>();
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	@Inject
 	private HashBean pwEnc;
@@ -34,20 +43,19 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	@Inject
 	private StatisticManagementLocal statistics;
 	
-	public int getNumberOfRegisteredUser() {
-		return database.size();
-	}
-	
 	@Override
 	public void register(String username, String password) throws UserAlreadyExistsException {
-		if (database.containsKey(username))
+		TypedQuery<User> q = entityManager.createNamedQuery("User.findByUsername", User.class);
+		q.setParameter("username", username);
+		if (!q.getResultList().isEmpty())
 			throw new UserAlreadyExistsException();
 		
 		User newUser = new User();
 		newUser.setUsername(username);
 		newUser.setPasswordHash(pwEnc.hash(password));
 		newUser.setStatistic(new UserStatistic());
-		database.put(username, newUser);
+		
+		entityManager.persist(newUser);
 		
 		broadcast.broadcastMessage(ChatMessage.register(username));
 	}
@@ -58,15 +66,19 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		if (!checkPassword(username, password))
 			throw new AuthenticationFailedException();
 		
-		loggedInUsers.add(u);
-		if(loggedInUsers.size() == 1)
+		u.setLoggedIn(true);
+		
+		if(getOnlineUsers().size() == 1)
 			statistics.startStatisticTimer();
+		
 		UserStatistic stat = u.getStatistic();
 		stat.setLastLogin(new Date());
 		stat.setLogins(stat.getLogins() + 1);
 		u.setStatistic(stat);
 		
 		statistics.newLogin();
+		
+		entityManager.merge(u);
 		
 		broadcast.broadcastMessage(ChatMessage.login(username));
 		
@@ -76,9 +88,9 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	@Override
 	public void logout(String username) throws UserNotFoundException {
 		User u = getUser(username);
-		loggedInUsers.remove(u);
+		u.setLoggedIn(false);
 		
-		if(loggedInUsers.isEmpty())
+		if(getOnlineUsers().isEmpty())
 			statistics.stopStatisticTimer();
 		
 		UserStatistic stat = u.getStatistic();
@@ -87,17 +99,21 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 		
 		statistics.newLogout();
 		
+		entityManager.merge(u);
+		
 		broadcast.broadcastMessage(ChatMessage.logout(username));
 	}
 
 	@Override
 	public int getNumberOfRegisteredUsers() {
-		return database.size();
+		TypedQuery<Long> q = entityManager.createNamedQuery("User.count", Long.class);
+		return q.getSingleResult().intValue();
 	}
 
 	@Override
 	public List<User> getOnlineUsers() {
-		return loggedInUsers;
+		TypedQuery<User> q = entityManager.createNamedQuery("User.findByLoggedIn", User.class);
+		return q.getResultList();
 	}
 
 	@Override
@@ -108,25 +124,28 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 	@Override
 	public void deleteUser(String username) throws UserNotFoundException {
 		User u = getUser(username);
-		database.remove(u);
+		entityManager.remove(u);
 	}
 
 	@Override
 	public User getUser(String username) throws UserNotFoundException {
-		if(!database.containsKey(username))
+		TypedQuery<User> q = entityManager.createNamedQuery("User.findByUsername", User.class);
+		q.setParameter("username", username);
+		try {
+			return q.getSingleResult();
+		} catch(NoResultException e) {
 			throw new UserNotFoundException();
-		return database.get(username);
+		}
 	}
 
 	@Override
-	public boolean checkPassword(String username, String password) {
-		return database.get(username).getPasswordHash().equals(pwEnc.hash(password));
+	public boolean checkPassword(String username, String password) throws UserNotFoundException {
+		return getUser(username).getPasswordHash().equals(pwEnc.hash(password));
 	}
 
 	@Override
 	public void nuke() {
-		database = new HashMap<>();
-		loggedInUsers = new LinkedList<>();
+		//TODO
 	}
 
 	@Override
