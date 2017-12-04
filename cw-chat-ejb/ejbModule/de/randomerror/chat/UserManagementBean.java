@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import de.fh_dortmund.inf.cw.chat.server.entities.UserStatistic;
@@ -145,7 +146,14 @@ public class UserManagementBean implements UserManagementLocal, UserManagementRe
 
 	@Override
 	public void nuke() {
-		//TODO
+		List<Query> l = new LinkedList<>();
+		l.add(entityManager.createNativeQuery("DELETE FROM CHAT_USER"));
+		l.add(entityManager.createNativeQuery("DELETE FROM USERSTATISTIC"));
+		l.add(entityManager.createNativeQuery("DELETE FROM COMMONSTATISTIC WHERE ENDDATE IS NOT NULL"));
+		
+		for(Query q: l) {
+			q.executeUpdate();
+		}
 	}
 
 	@Override

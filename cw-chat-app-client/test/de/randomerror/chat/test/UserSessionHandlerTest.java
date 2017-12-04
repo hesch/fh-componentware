@@ -117,7 +117,12 @@ public class UserSessionHandlerTest {
 	
 	@Test
 	public void disconnect() throws Exception {
-		//TODO
+		serviceHandler.register("test", "test");
+		serviceHandler.login("test", "test");
+		//test if disconnect calls logout
+		serviceHandler.disconnect();
+
+		assertEquals(serviceHandler.getNumberOfOnlineUsers(), 0);
 	}
 
 	@Test
